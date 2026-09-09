@@ -1,0 +1,23 @@
+{
+  "input": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "add",
+      "args": {
+        "uri": "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat",
+        "wantedList": ["ru"]
+      }
+    }
+  ],
+  "output": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputDir": "./output",
+        "outputName": "geoip.dat",
+        "wantedList": ["ru"]
+      }
+    }
+  ]
+}
