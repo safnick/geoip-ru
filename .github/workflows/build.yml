@@ -40,21 +40,27 @@ jobs:
 
           cd output
           sha256sum geoip.dat > geoip.dat.sha256
-
+          
       - name: Publish Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          DATE=$(TZ=Europe/Moscow date +"%Y-%m-%d")
+          TITLE="RU GeoIP — $DATE"
+
           if gh release view ru-latest >/dev/null 2>&1; then
             gh release upload ru-latest \
               output/geoip.dat \
               output/geoip.dat.sha256 \
               --clobber
+
+            gh release edit ru-latest \
+              --title "$TITLE"
           else
             gh release create ru-latest \
               output/geoip.dat \
               output/geoip.dat.sha256 \
-              --title "RU GeoIP" \
+              --title "$TITLE" \
               --notes "Automatically generated RU-only geoip.dat from v2fly/geoip."
           fi
           
